@@ -1,0 +1,13 @@
+.inactive {
+    pointer-events: none;
+  }
+  
+.indicator {
+  position: absolute;
+  top: 0;
+  height: 8px;
+  background-color: #D15A5A;
+  transition: transform 0.3s ease-out;
+  
+  }
+  

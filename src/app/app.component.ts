@@ -5,11 +5,12 @@ import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent } from './header/header.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { MonitorsComponent } from './monitors/monitors.component';
+import { ActivityComponent } from './activity/activity.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent ,MenuComponent, ActivitiesComponent, MonitorsComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent ,MenuComponent, ActivitiesComponent, MonitorsComponent, ActivityComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

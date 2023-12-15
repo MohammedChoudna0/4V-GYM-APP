@@ -1,0 +1,9 @@
+<div class="p-2 " [ngClass]="{'bg-green-500 text-white': !actividad, 'bg-gray-300 text-black': actividad}" style="width: 568px; height: 169px;">
+    <div class="flex justify-between items-center">
+      <div class="text-gray-100" *ngIf="actividad">{{ actividad.hora }}</div>
+      <div class="text-white" *ngIf="actividad">{{ actividad.nombre }}</div>
+      <div class="text-white" *ngIf="!actividad">FREE</div>
+    </div>
+</div>
+
+

@@ -17,7 +17,6 @@ export class MonitorService {
     new Monitor(4, 'dksjafkds', '9218731@lsakj.com', '1273º1087'),
     new Monitor(3, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
     new Monitor(4, 'dksjafkds', '9218731@lsakj.com', '1'),
-    // ... más monitores
   ];
 
   constructor() {}
@@ -40,9 +39,7 @@ export class MonitorService {
     return foundMonitor || null;
   }
 
-  addMonitor(monitorToAdd: Monitor): void {
-    const newId = this.monitors.length + 1;
-    const newMonitor = { ...monitorToAdd, id: newId };
-    this.monitors.push(newMonitor);
+  addMonitor(monitor: Monitor): void {
+    this.monitors.push(monitor);
   }
 }

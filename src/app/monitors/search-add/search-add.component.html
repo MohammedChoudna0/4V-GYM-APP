@@ -1,0 +1,27 @@
+<!-- Contenedor principal con alineación central vertical -->
+<div class="flex justify-center items-start mt-4">
+
+    <!-- Contenedor de la barra de búsqueda con tamaño ajustado -->
+    <div class="flex items-center w-full max-w-2xl h-[3.938rem] bg-zinc-300 rounded-[0.625rem] shadow border border-red-500">
+      <!-- Ícono de búsqueda -->
+      <div class="ml-4">
+        <img src="assets/material-symbols_search.svg" alt="Buscar" class="h-5 w-5" />
+      </div>
+  
+      <!-- Campo de búsqueda -->
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+        class="w-full h-full pl-4 bg-transparent border-none focus:ring-0 text-gray-700 focus:outline-none"
+      />
+    </div>
+  
+    <!-- Botón de añadir -->
+    <div class="p-7 relative">
+        <button class="flex items-center justify-center">
+          <img src="assets/mingcute_add-fill.svg" alt="Añadir"/>
+        </button>
+      </div>      
+  </div>
+  

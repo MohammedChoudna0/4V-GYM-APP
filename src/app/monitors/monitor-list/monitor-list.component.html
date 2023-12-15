@@ -1,0 +1,17 @@
+<div class="mx-auto w-full max-w-[1440px] relative flex items-center justify-center">
+    <!-- Botón izquierdo para desplazar el carrusel hacia la izquierda -->
+    <button class="absolute left-0 z-10" (click)="moveLeft()">
+      <img src="../../../assets/mingcute_arrows-left-fill.svg" alt="Anterior" />
+    </button>
+  
+    <!-- Contenedor del carrusel -->
+    <div class="flex overflow-hidden " [ngStyle]="getCarouselStyle()">
+      <app-monitor-card *ngFor="let monitor of getMonitorsToShow()" [monitor]="monitor" class="flex-none mx-10"></app-monitor-card>
+    </div>
+  
+  
+    <!-- Botón derecho para desplazar el carrusel hacia la derecha -->
+    <button class="absolute right-0 z-10" (click)="moveRight()">
+      <img src="../../../assets/mingcute_arrows-right-fill.svg" alt="Siguiente" />
+    </button>
+  </div>

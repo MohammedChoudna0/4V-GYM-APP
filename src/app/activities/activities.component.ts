@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DayViewComponentComponent } from '../day-view-component/day-view-component.component';
 
 @Component({
-  selector: 'app-activities',
+  selector: 'activities',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, DayViewComponentComponent],
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.scss'
 })

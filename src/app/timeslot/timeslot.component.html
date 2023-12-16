@@ -1,0 +1,18 @@
+<div class="flex h-[115px] w-full">
+  <div class="flex flex-col justify-center mx-3">
+      <p class="text-black">{{ startTime }} </p>
+      <p class="text-black"> {{ endTime }} </p>
+  </div>
+  <div [style.background-color]="slotColor" class="p-4 flex items-center justify-center w-full">
+      <!-- Contenido del slot -->
+      <div>
+          <!-- Puedes agregar contenido adicional aquí si es necesario -->
+      </div>
+      <p *ngIf="isBooked; else freeSlot" class="text-black">
+          Booked by: {{ bookedBy.join(', ') }}
+      </p>
+      <ng-template #freeSlot>
+          <p class="text-white">FREE</p>
+      </ng-template>
+  </div>
+</div>

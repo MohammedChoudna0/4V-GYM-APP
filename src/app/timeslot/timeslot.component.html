@@ -1,18 +1,84 @@
-<div class="flex h-[115px] w-full">
+<div class="flex h-[115px] w-full relative">
   <div class="flex flex-col justify-center mx-3">
-      <p class="text-black">{{ startTime }} </p>
-      <p class="text-black"> {{ endTime }} </p>
+    <p class="text-black">{{ startTime }} </p>
+    <p class="text-black"> {{ endTime }} </p>
   </div>
-  <div [style.background-color]="slotColor" class="p-4 flex items-center justify-center w-full">
-      <!-- Contenido del slot -->
-      <div>
-          <!-- Puedes agregar contenido adicional aquí si es necesario -->
+
+  <div [style.background-color]="slotColor" class="p-4 flex items-center  w-full relative">
+    <!-- Contenido del slot -->
+    <div *ngIf="activity; else freeSlot" class="flex">
+      <!-- Botón de borrar -->
+      <button (click)="onDeleteClick()" class="absolute top-2 right-2 h-6 w-6">
+        <img src="../../assets/ph_trash-fill.svg" alt="Trash Icon">
+      </button>
+      <!-- Botón de editar -->
+      <button (click)="onEditClick()" class="absolute bottom-2 right-2 h-6 w-6">
+        <img src="../../assets/ic_round-edit.svg" alt="Edit Icon">
+      </button>
+
+      <div class="flex flex-row space-x-2">
+        <div *ngFor="let monitor of activity.monitors">
+          <img src="../../assets/active_ion_person.svg" alt="Monitor Icon" class="h-2/3 w-5/6 m-auto">
+          <span>{{ monitor }}</span>
+        </div>
       </div>
-      <p *ngIf="isBooked; else freeSlot" class="text-black">
-          Booked by: {{ bookedBy.join(', ') }}
-      </p>
-      <ng-template #freeSlot>
-          <p class="text-white">FREE</p>
-      </ng-template>
+
+      <!-- Imagen representativa de la actividad -->
+      <img [src]="'../../assets/' + activity.type + '.svg'" alt="Activity Icon" class="absolute top-2 right-12">
+    </div>
+
+
+    <ng-template #freeSlot>
+      <div class="flex items-center justify-center w-full">
+        <p class="text-white font-bold">FREE</p>
+        <!-- Botón de añadir -->
+        <button (click)="onAddClick()" class="absolute top-2 right-3 h-8 w-8">
+          <img src="../../assets/mingcute_add-fill.svg" alt="Otro Icono">
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>
+<!-- Modal de Añadir actividad -->
+<div *ngIf="showModal"
+  class="fixed inset-0 bg-gray-600 bg-opacity-50 backdrop-blur-sm overflow-y-auto h-full w-full z-50 flex justify-center items-center">
+  <!-- Contenedor del modal centrado y más grande -->
+  <div class="relative m-auto p-5 border w-1/2 max-w-2xl shadow-lg rounded-md bg-white">
+    <!-- Contenido del modal -->
+    <div class="mt-3 text-center">
+
+      <!-- Formulario para añadir monitor -->
+      <form class="w-full">
+        <!-- Campo Nombre -->
+        <div class="relative">
+          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3" id="tipoActividad">
+            <option>Selecciona una actividad</option>
+            <option>Pilates</option>
+            <option>Spinning</option>
+            <!-- Otras opciones van aquí -->
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12l-6-6 1.414-1.414L10 9.172l4.586-4.586L16 6z"/></svg>
+          </div>
+        </div>
+        
+        
+
+        <!-- Botones Aceptar y Cancelar -->
+        <div class="flex items-center justify-center space-x-4">
+          <button
+            class="w-64 h-12 bg-red-500 rounded-[20px] text-normal font-normal text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50"
+            type="button">
+            Aceptar
+          </button>
+          <button
+            class="w-64 h-12 bg-red-500 rounded-[20px] text-normal font-normal text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50"
+            type="button" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--danger-->

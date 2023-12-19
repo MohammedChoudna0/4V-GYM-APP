@@ -1,7 +1,7 @@
 export interface Activity {
   activity_date: Date;
   place: string;
-  monitor: string;
+  monitors: string[];
   type: string;
   id?: BigInt;
 }

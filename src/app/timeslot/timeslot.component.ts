@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Activity } from '../model/activityModel';
 import { FormsModule } from '@angular/forms';
 import {  TemplateRef, ViewChild } from '@angular/core';
-import { DialogService } from '@ngneat/dialog';
 
 
 
@@ -15,7 +14,6 @@ import { DialogService } from '@ngneat/dialog';
   styleUrl: './timeslot.component.scss'
 })
 export class TimeslotComponent {
-  @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 
   @Input() startTime: string = '';
   @Input() endTime: string = '';
@@ -28,7 +26,7 @@ export class TimeslotComponent {
   get slotColor(): string {
     return this.activity ? '#D9D9D9' : '#2B7D3D';
   }
-  constructor(private dialog: DialogService) {}
+  constructor() {}
   showModal:boolean = false;
   closeModel:boolean = false;
   onAddClick() {

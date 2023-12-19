@@ -62,7 +62,6 @@ export class MonitorsComponent implements OnInit {
     this.isAddingMonitor = false;
     this.loadMonitors();
   }
-
   cancelAddMonitor(): void {
     this.isAddingMonitor = false;
   }

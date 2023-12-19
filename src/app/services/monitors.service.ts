@@ -11,12 +11,12 @@ export class MonitorService {
     new Monitor(2, 'SLKJDADS', 'skdjs@example.com', '219807298'),
     new Monitor(3, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
     new Monitor(4, 'dksjafkds', '9218731@lsakj.com', '1273º1087'),
-    new Monitor(3, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
-    new Monitor(4, 'dksjafkds', '9218731@lsakj.com', '1273º1087'),
-    new Monitor(3, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
-    new Monitor(4, 'dksjafkds', '9218731@lsakj.com', '1273º1087'),
-    new Monitor(3, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
-    new Monitor(4, 'dksjafkds', '9218731@lsakj.com', '1'),
+    new Monitor(5, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
+    new Monitor(6, 'dksjafkds', '9218731@lsakj.com', '1273º1087'),
+    new Monitor(7, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
+    new Monitor(8, 'dksjafkds', '9218731@lsakj.com', '1273º1087'),
+    new Monitor(9, 'dsalkdal', 'dklaslkd@example.com', '273861829'),
+    new Monitor(10, 'dksjafkds', '9218731@lsakj.com', '1'),
   ];
 
   constructor() {}
@@ -41,5 +41,16 @@ export class MonitorService {
 
   addMonitor(monitor: Monitor): void {
     this.monitors.push(monitor);
+  }
+
+  deleteMonitor(id: number): void {
+    this.monitors = this.monitors.filter(m => m.id !== id);
+  }
+
+  updateMonitor(updatedMonitor: Monitor): void {
+    const index = this.monitors.findIndex(m => m.id === updatedMonitor.id);
+    if (index !== -1) {
+      this.monitors[index] = updatedMonitor;
+    }
   }
 }

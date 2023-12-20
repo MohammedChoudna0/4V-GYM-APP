@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Monitor } from '../../model/monitorModel';
 import { MonitorCardComponent } from './monitor-card/monitor-card.component';
 import { CommonModule } from '@angular/common';
@@ -13,15 +13,29 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './monitor-list.component.scss'
 })
 export class MonitorListComponent {
+  allMonitors: Monitor[] = [];
   @Input() monitors: Monitor[] = [];
   currentIndex= 0;
   itemsPerPage = 3;
   showEditModal = false;
-  monitorEditando: Monitor = new Monitor(0, '', '', '');
+  monitorEditando: Monitor = new Monitor(0, '', '', '', '');
+  @ViewChild('fileInput') fileInput: ElementRef | null = null;
+  @Input() set searchTerm(value: string) {
+    this._searchTerm = value;
+    console.log('Término de búsqueda actualizado:', this._searchTerm);
+    this.filterMonitors();
+  }
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  private _searchTerm = '';
 
   constructor(private monitorService: MonitorService) {
-    this.monitors = this.monitorService.getMonitors();
-   }
+    this.allMonitors = this.monitorService.getMonitors();
+    this.monitors = [...this.allMonitors];
+  }
   
   // Función para mover el carrusel a la izquierda
   moveRight() {
@@ -37,12 +51,6 @@ export class MonitorListComponent {
     }
   }
 
-  getCarouselStyle() {
-    return {
-      transition: 'transform 1s ease'
-    };
-  }
-
   getMonitorsToShow(): Monitor[] {
     let startIndex = this.currentIndex;
     let endIndex = startIndex + this.itemsPerPage;
@@ -52,13 +60,16 @@ export class MonitorListComponent {
       startIndex = endIndex - this.itemsPerPage;
     }
   
-    return this.monitors.slice(startIndex, endIndex);
+    let monitorsToShow = this.monitors.slice(startIndex, endIndex);
+    console.log('Monitores a mostrar:', monitorsToShow);
+    return monitorsToShow;
   }
 
-  // monitor-list.component.ts
   eliminar(id: number): void {
+    this.allMonitors = this.allMonitors.filter(m => m.id !== id);
     this.monitors = this.monitors.filter(m => m.id !== id);
   }
+  
 
   editar(id: number): void {
     this.currentIndex = this.monitors.findIndex(m => m.id === id);
@@ -76,8 +87,35 @@ export class MonitorListComponent {
     }
   }
   
+  
   closeEditModal(): void {
     this.showEditModal = false;
   }
 
+  onSearchChange(): void {
+    this.filterMonitors();
+  }
+
+  filterMonitors(): void {
+    this.monitors = this.allMonitors.filter(monitor => monitor.name.includes(this.searchTerm));
+    console.log('Monitores filtrados:', this.monitors);
+  }
+
+  triggerFileInput(): void {
+    if (this.fileInput && this.fileInput.nativeElement) {
+      this.fileInput.nativeElement.click();
+    } else {
+      // Manejar el caso en que el elemento aún no esté disponible
+      console.error('El input de archivo no está disponible.');
+    }
+  }
+
+  onFileSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      this.monitorEditando.imageUrl = URL.createObjectURL(file);
+    }
+  } 
+
+  
 }

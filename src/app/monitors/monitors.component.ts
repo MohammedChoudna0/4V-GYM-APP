@@ -27,27 +27,8 @@ export class MonitorsComponent implements OnInit {
     this.loadMonitors();
   }
 
-  handleSearch(query: string): void {
-    if (!query) {
-      this.filteredMonitors = [...this.monitors];
-    } else {
-      this.filteredMonitors = this.monitors.filter(monitor =>
-        monitor.name.toLowerCase().includes(query.toLowerCase()) ||
-        monitor.email.toLowerCase().includes(query.toLowerCase()) ||
-        monitor.phone.includes(query)
-      );
-    }
-    // Si el filtro deja un solo monitor, podrías querer seleccionarlo automáticamente
-    if (this.filteredMonitors.length === 1) {
-      this.selectedMonitor = this.filteredMonitors[0];
-    } else {
-      this.selectedMonitor = null;
-    }
-  }
-
   loadMonitors(): void {
     this.monitors = this.monitorService.getMonitors();
-    // Inicializa la lista filtrada con todos los monitores al cargar
     this.filteredMonitors = [...this.monitors];
   }
 
@@ -57,12 +38,17 @@ export class MonitorsComponent implements OnInit {
 
   addMonitor(name: string, email: string, phone: string): void {
     // Asumiendo que el modelo Monitor tiene un campo id
-    const newMonitor: Monitor = { id: this.monitors.length + 1, name, email, phone };
+    const newMonitor: Monitor = { id: this.monitors.length + 1, name, email, phone, imageUrl: '' };
     this.monitorService.addMonitor(newMonitor);
     this.isAddingMonitor = false;
     this.loadMonitors();
   }
   cancelAddMonitor(): void {
     this.isAddingMonitor = false;
+  }
+
+  searchMonitors(searchTerm: string): void {
+    this.filteredMonitors = this.monitorService.searchMonitor(searchTerm);
+    console.log('Monitores filtrados:', this.filteredMonitors);
   }
 }

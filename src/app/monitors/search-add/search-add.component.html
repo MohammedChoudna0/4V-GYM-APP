@@ -9,7 +9,7 @@
 
     <!-- Campo de búsqueda -->
     <input type="text" [(ngModel)]="searchQuery" (input)="onSearchChange()"
-      class="flex-grow h-full pl-4 bg-transparent border-none focus:ring-0 text-gray-700 focus:outline-none" />
+      class="flex-grow h-full pl-4 bg-transparent border-none focus:ring-0 text-gray-700 focus:outline-none search-bar" />
   </div>
 </div>
 
@@ -35,7 +35,7 @@
       <form class="w-full">
         <!-- Campo Nombre --> 
         <div class="mb-4">
-          <input [(ngModel)]="monitor.name" name="name"
+          <input [(ngModel)]="monitor.name" name="name  "
             class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name" type="text" placeholder="Nombre">
         </div>

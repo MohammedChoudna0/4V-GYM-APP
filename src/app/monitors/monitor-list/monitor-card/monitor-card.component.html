@@ -8,9 +8,10 @@
         </button>
     </div>               
     <div class="flex-1 text-center flex flex-col items-center">
-        <button onclick="aniadir_imagen()">
-            <img src="../../../../assets/Vector.svg" alt="icono_monitor" class="mb-2">
-        </button>
+        <div class="h-1/2 w-1/3 overflow-hidden">
+            <img [src]="monitor.imageUrl || '../../../../assets/Vector.svg'" alt="icono_monitor" class="object-contain w-full h-full mb-2">
+        </div>
+            
         <div class="font-normal">{{ monitor.name }}</div>
         <p class="font-normal">{{ monitor.email }}</p>
         <p class="font-normal">{{ monitor.phone }}</p>

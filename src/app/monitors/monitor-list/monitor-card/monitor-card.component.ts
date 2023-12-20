@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './monitor-card.component.scss'
 })
 export class MonitorCardComponent {
-  @Input() monitor!: { id: number; name: string; email: string; phone: string};
+  @Input() monitor!: { id: number; name: string; email: string; phone: string, imageUrl: string};
   @Output() deleteRequest = new EventEmitter<number>();
   @Output() editRequest = new EventEmitter<number>();
 
@@ -24,5 +24,3 @@ export class MonitorCardComponent {
     this.editRequest.emit(this.monitor.id);
   }
 }
-
-

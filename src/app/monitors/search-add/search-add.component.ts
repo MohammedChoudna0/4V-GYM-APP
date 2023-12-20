@@ -16,7 +16,8 @@ export class SearchAddComponent {
     id: 0,
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    imageUrl: ''
   };
   showModal: boolean = false;
   isAddingMonitor: boolean = false;
@@ -29,6 +30,7 @@ showAddMonitorForm() {
   searchQuery: string = '';
 
   onSearchChange(): void {
+    console.log('El término de búsqueda ha cambiado:', this.searchQuery);
     this.search.emit(this.searchQuery);
   }
 
@@ -57,7 +59,8 @@ showAddMonitorForm() {
       id: 0,
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      imageUrl: ''
     };
   }
   

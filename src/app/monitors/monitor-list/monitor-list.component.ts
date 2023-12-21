@@ -15,14 +15,13 @@ import { FormsModule } from '@angular/forms';
 export class MonitorListComponent {
   allMonitors: Monitor[] = [];
   @Input() monitors: Monitor[] = [];
-  currentIndex= 0;
-  itemsPerPage = 3;
   showEditModal = false;
   monitorEditando: Monitor = new Monitor(0, '', '', '', '');
+  currentIndex = 0;
+  itemsPerPage = 3;
   @ViewChild('fileInput') fileInput: ElementRef | null = null;
   @Input() set searchTerm(value: string) {
     this._searchTerm = value;
-    console.log('Término de búsqueda actualizado:', this._searchTerm);
     this.filterMonitors();
   }
 
@@ -39,40 +38,33 @@ export class MonitorListComponent {
   
   // Función para mover el carrusel a la izquierda
   moveRight() {
-    if (this.currentIndex < this.monitors.length - 1) {
-      this.currentIndex++;
+    let first = this.monitors.shift();
+    if (first) {
+      this.monitors.push(first);
     }
   }
   
   // Función para mover el carrusel a la izquierda
   moveLeft() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
+    let last = this.monitors.pop();
+    if (last) {
+      this.monitors.unshift(last);
     }
   }
 
-  getMonitorsToShow(): Monitor[] {
-    let startIndex = this.currentIndex;
-    let endIndex = startIndex + this.itemsPerPage;
-  
-    if (endIndex > this.monitors.length) {
-      endIndex = this.monitors.length;
-      startIndex = endIndex - this.itemsPerPage;
-    }
-  
-    let monitorsToShow = this.monitors.slice(startIndex, endIndex);
-    console.log('Monitores a mostrar:', monitorsToShow);
-    return monitorsToShow;
-  }
+  // Función para obtener todos los monitores
+  getMonitors(): Monitor[] {
+    return this.monitors.slice(this.currentIndex, this.itemsPerPage);;
+  } 
 
   eliminar(id: number): void {
     this.allMonitors = this.allMonitors.filter(m => m.id !== id);
     this.monitors = this.monitors.filter(m => m.id !== id);
   }
   
-
+  //función para editar un monitor
   editar(id: number): void {
-    this.currentIndex = this.monitors.findIndex(m => m.id === id);
+    this.abrirModalEdicion(this.allMonitors.find(m => m.id === id)!);
   }
   
   abrirModalEdicion(monitor: Monitor): void {
@@ -96,9 +88,15 @@ export class MonitorListComponent {
     this.filterMonitors();
   }
 
+  // Función para obtener los monitores según la búsqueda
   filterMonitors(): void {
-    this.monitors = this.allMonitors.filter(monitor => monitor.name.includes(this.searchTerm));
-    console.log('Monitores filtrados:', this.monitors);
+    if (this._searchTerm) {
+      this.monitors = this.allMonitors.filter(monitor => 
+        monitor.name.toLowerCase().includes(this._searchTerm.toLowerCase())
+      );
+    } else {
+      this.monitors = [...this.allMonitors];
+    }
   }
 
   triggerFileInput(): void {
@@ -115,7 +113,5 @@ export class MonitorListComponent {
       const file = event.target.files[0];
       this.monitorEditando.imageUrl = URL.createObjectURL(file);
     }
-  } 
-
-  
+  }
 }

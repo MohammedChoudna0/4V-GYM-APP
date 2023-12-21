@@ -22,15 +22,14 @@ export class SearchAddComponent {
   showModal: boolean = false;
   isAddingMonitor: boolean = false;
 
-  constructor(private monitorService: MonitorService) {}
-showAddMonitorForm() {
-  this.isAddingMonitor = true;
-}
+  constructor(private monitorService: MonitorService) { }
+  showAddMonitorForm() {
+    this.isAddingMonitor = true;
+  }
   @Output() search = new EventEmitter<string>();
   searchQuery: string = '';
 
   onSearchChange(): void {
-    console.log('El término de búsqueda ha cambiado:', this.searchQuery);
     this.search.emit(this.searchQuery);
   }
 
@@ -48,7 +47,7 @@ showAddMonitorForm() {
       ...this.monitor,
       id: this.monitorService.getMonitors().length + 1
     };
-    
+
     this.monitorService.addMonitor(newMonitor as Monitor);
     this.closeModal();
     this.resetForm();
@@ -63,5 +62,5 @@ showAddMonitorForm() {
       imageUrl: ''
     };
   }
-  
+
 }

@@ -2,7 +2,10 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Activity } from '../model/activityModel';
 import { FormsModule } from '@angular/forms';
-import {  TemplateRef, ViewChild } from '@angular/core';
+import { Monitor } from '../model/monitorModel';
+import { MonitorService } from '../services/monitors.service';
+import { ActivityService } from '../services/activity.service';
+import { ActivityType } from '../services/activity.service';
 
 
 
@@ -13,20 +16,34 @@ import {  TemplateRef, ViewChild } from '@angular/core';
   templateUrl: './timeslot.component.html',
   styleUrl: './timeslot.component.scss'
 })
-export class TimeslotComponent {
+export class TimeslotComponent  {
 
   @Input() startTime: string = '';
   @Input() endTime: string = '';
-  @Input() activity!: Activity;
+  @Input() activity!: Activity | null;
+  @Input() date: Date | null = null;
 
-  tipoActividad: string = "";
-  monitor1: string = "";
-  selectedActivity: string = ''; // Para almacenar el tipo de actividad seleccionado
+  monitors: Monitor[] = [];
+  activityTypes: ActivityType[] = [];
+  selectedActivity: ActivityType | null = null;
+  selectedMonitors: string[] = [];
+  selectedActivityType: string = '';
+  editMode: boolean = false;
 
+
+  onActivitySelected(event: any) {
+    const selectedActivityName = event.target.value;
+    this.selectedActivity = this.activityTypes.find(activityType => activityType.name === selectedActivityName) || null;
+  
+  }
   get slotColor(): string {
     return this.activity ? '#D9D9D9' : '#2B7D3D';
   }
-  constructor() {}
+  constructor(private monitorService: MonitorService , private activityService: ActivityService) {
+    this.monitors = this.monitorService.getMonitors();
+    this.activityTypes = this.activityService.getActivityTypes();
+
+  }
   showModal:boolean = false;
   closeModel:boolean = false;
   onAddClick() {
@@ -34,17 +51,40 @@ export class TimeslotComponent {
   }
 
   onEditClick() {
-    alert('Editar clicado!');
+    if (this.activity) {
+      this.editMode = true;
+      this.selectedActivityType = this.activity.type;
+      this.selectedMonitors = this.activity.monitors;
+      this.openModal();
+    }
   }
-
   onDeleteClick() {
-    alert('Borrar clicado!');
+    if (this.activity && this.activity.id !== undefined) {
+      this.activityService.deleteActivity(this.activity.id);
+      alert('Actividad borrada!');
+    }
   }
-  onAceptarClick() {
-    alert('Tipo de actividad: ' + this.tipoActividad);
-    alert('Monitor 1: ' + this.monitor1);
-    // Haz algo con los valores de los campos de formulario
+  
+  onAceptarClick(): void {
+    if (this.date) {
+      const newActivity: Activity = {
+        activity_date: this.date, 
+        monitors: this.selectedMonitors,
+        type: this.selectedActivityType,
+        timeSlot: this.startTime + "-" + this.endTime  , 
+        id: this.editMode && this.activity ? this.activity.id : BigInt(this.activityService.getActivities.length + 1) 
+      };
+      if (this.editMode) {
+        this.activityService.updateActivity(newActivity);
+      } else {
+        this.activityService.addActivity(newActivity);
+      }
+      this.closeModal();
+      this.editMode = false;
+    } 
   }
+  
+  
   onCancelarClick() {
     // Haz algo cuando se haga clic en "CANCELAR"
   }
@@ -56,4 +96,4 @@ export class TimeslotComponent {
   closeModal(): void {
     this.showModal = false;
   }
-} 
+}

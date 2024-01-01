@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DayViewComponentComponent } from '../day-view-component/day-view-component.component';
 
+
+
 @Component({
   selector: 'activities',
   standalone: true,

@@ -6,6 +6,8 @@ import { HeaderComponent } from './header/header.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { MonitorsComponent } from './monitors/monitors.component';
 
+
+
 @Component({
   selector: 'app-root',
   standalone: true,

@@ -19,6 +19,9 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@ngneat/dialog": "^5.0.0",
+    "flatpickr": "^4.6.13",
+    "flowbite": "^2.2.1",
+    "mydatepicker": "^2.6.11",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.2"
   },

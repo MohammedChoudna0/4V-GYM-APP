@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Activity } from '../model/activityModel';
 
 @Injectable({
@@ -11,45 +12,100 @@ export class ActivityService {
     new ActivityType('Actividad 3', 1),
     new ActivityType('Actividad 4', 4),
   ];
-  
+
   getActivityTypes(): ActivityType[] {
     return [...this.activityTypes];
   }
 
-  private activities: Activity[] = [
+  private _activities: BehaviorSubject<Activity[]> = new BehaviorSubject<Activity[]>([
     {
       activity_date: new Date(2023, 11, 25),
-      place: 'Madrid',
       monitors: ['Monitor 1', 'Monitor 2','Mikel'],
       type: 'spinning',
+      timeSlot: '10:00-11:30',
       id: BigInt(1)
     },
     {
       activity_date: new Date(2023, 11, 26),
-      place: 'Barcelona',
       monitors: ['Monitor 3' , 'John Cena '],
       type: 'pilates',
+      timeSlot: '13:30-15:00',
       id: BigInt(2)
     },
     {
       activity_date: new Date(2023, 11, 27),
-      place: 'Valencia',
       monitors: ['Monitor 4', 'Monitor 5'],
       type: 'Spinning',
+      timeSlot: '17:30-19:00',
       id: BigInt(3)
-    }
-  ];
+    },
+    {
+      activity_date: new Date(2023, 11, 27),
+      monitors: ['Monitor 4', 'Monitor 5'],
+      type: 'Spinning',
+      timeSlot: '10:00-11:30',
+      id: BigInt(4)
+    },
+    {
+      activity_date: new Date(2023, 11, 27),
+      monitors: ['Monitor 6', 'Monitor 7'],
+      type: 'Yoga',
+      timeSlot: '13:30-15:00',
+      id: BigInt(5)
+    }  ]);
+
   constructor() { }
-    // Método para obtener todas las actividades
-    getActivities(): Activity[] {
-      return [...this.activities];
+
+  getActivities(): Observable<Activity[]> {
+    return this._activities.asObservable();
+  }
+
+  getActivity(id: BigInt): Activity | undefined {
+    const activities = this._activities.getValue();
+    return activities.find(activity => activity.id === id);
+  }
+
+  getActivitiesForDate(date: Date): Activity[] {
+    const activities = this._activities.getValue();
+    return activities.filter(activity => {
+      return activity.activity_date.getDate() === date.getDate() &&
+            activity.activity_date.getMonth() === date.getMonth() &&
+            activity.activity_date.getFullYear() === date.getFullYear();
+    });
+  }
+
+  addActivity(activity: Activity): void {
+    const activities = this._activities.getValue();
+    activities.push(activity);
+    this._activities.next(activities);
+    console.log("Actividad agregada", activity, activities.length);
+  }
+
+  deleteActivity(id: BigInt): void {
+    let activities = this._activities.getValue();
+    for (let i = 0; i < activities.length; i++) {
+        if (activities[i].id === id) {
+            activities.splice(i, 1);
+            break;
+        }
+
     }
-  
-    // Método para obtener una actividad por su id
-    getActivity(id: BigInt): Activity | undefined {
-      return this.activities.find(activity => activity.id === id);
-    }
+    console.log(activities.length);
+    this._activities.next(activities);
 }
+
+
+
+  updateActivity(updatedActivity: Activity): void {
+    const activities = this._activities.getValue();
+    const index = activities.findIndex(activity => activity.id === updatedActivity.id);
+    if (index !== -1) {
+      activities[index] = updatedActivity;
+      this._activities.next(activities);
+    }
+  }
+}
+
 // activity-type.ts
 
 export class ActivityType {

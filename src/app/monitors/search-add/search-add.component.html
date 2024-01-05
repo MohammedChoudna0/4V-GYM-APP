@@ -1,7 +1,7 @@
 <!-- Contenedor principal con alineación vertical y horizontal centrada -->
-<div class="flex justify-between items-center mt-4 w-full max-w-2xl mx-auto">
+<div class="flex justify-between searchContainer items-center mt-8 w-full max-w-2xl mx-auto z-50">
   <!-- Contenedor de la barra de búsqueda -->
-  <div class="flex items-center w-full h-[3.938rem] bg-zinc-300 rounded-[0.625rem] shadow border border-red-500">
+  <div class="flex items-center w-full h-[3rem] bg-zinc-300 rounded-[0.625rem] shadow-lg border border-red-500">
     <!-- Ícono de búsqueda -->
     <div class="ml-4">
       <img src="assets/material-symbols_search.svg" alt="Buscar" class="h-8 w-8" />
@@ -9,16 +9,24 @@
 
     <!-- Campo de búsqueda -->
     <input type="text" [(ngModel)]="searchQuery" (input)="onSearchChange()"
-      class="flex-grow h-full pl-4 bg-transparent border-none focus:ring-0 text-gray-700 focus:outline-none search-bar" />
+      class="flex-grow h-full   pl-4 bg-transparent z-50 border-none focus:ring-0 text-gray-700 focus:outline-none " />
+  </div>
+  <!-- Boton de Añadir -->
+</div>
+
+<div class="flex justify-between max-w-[1440px] me-5" style="margin-top: -50px;">
+  <div class="flex-1"></div>
+  <div class="flex-1"></div>
+  <div class="flex-1 add-button-container">
+    <button (click)="openModal()">
+      <img src="assets/mingcute_add-fill.svg" alt="Añadir" />
+    </button>
   </div>
 </div>
 
-<!-- Boton de Añadir -->
-<div class="flex justify-self-end">
-  <button (click)="openModal()">
-    <img src="assets/mingcute_add-fill.svg" alt="Añadir" />
-  </button>
-</div>
+
+
+
 
 <!-- Modal de Añadir Monitor -->
 <div *ngIf="showModal"

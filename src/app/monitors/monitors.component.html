@@ -1,2 +1,4 @@
-<app-search-add (search)="searchMonitors($event)"></app-search-add>
-<app-monitor-list [monitors]="searchQuery ? filteredMonitors : monitors"></app-monitor-list>
+<div class="monitors">
+    <app-search-add (search)="searchMonitors($event)"></app-search-add>
+    <app-monitor-list [monitors]="searchQuery ? filteredMonitors : monitors"></app-monitor-list>
+</div>

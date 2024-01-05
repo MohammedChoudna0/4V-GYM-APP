@@ -1,0 +1,37 @@
+.list {
+    width: 22rem;
+  }
+ .btn-left{
+    position: absolute;
+    left: -10px;
+    z-index: 10;
+ }
+ .btn-right{
+    position: absolute;
+    right: -10px;
+    z-index: 10;
+ }
+
+ 
+  
+  @media (min-width: 768px) {
+    .list {
+      width: 44rem;
+    }
+    .btn-left{
+        position: absolute;
+        left: -50px;
+        z-index: 10;
+     }
+     .btn-right{
+        position: absolute;
+        right: -50px;
+        z-index: 10;
+     }
+  }
+  
+  @media (min-width: 1024px) {
+    .list {
+      width: 66rem;
+    }
+  }

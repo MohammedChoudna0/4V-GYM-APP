@@ -14,6 +14,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrl: './day-view-component.component.scss'
 })
 export class DayViewComponentComponent implements OnInit {
+  date: Date = new Date();
+
   activities: Activity[] = [];
   morningActivity: Activity | null;
   afternoonActivity: Activity | null;
@@ -29,6 +31,14 @@ export class DayViewComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activityService.currentDate.subscribe(date => {
+      this.date = date;
+      this._date.next(date);
+      this.resetSlots();
+      this.activities = this.activityService.getActivitiesForDate(this._date.getValue());
+      this.assignActivitiesToTimeSlots()
+
+    });
     
     this.activityService.getActivities().subscribe(activities => {
       this.activities = this.activityService.getActivitiesForDate(this._date.getValue());
@@ -75,9 +85,6 @@ export class DayViewComponentComponent implements OnInit {
     this._date.next(newDate);
     this.activities = this.activityService.getActivitiesForDate(newDate);
     this.assignActivitiesToTimeSlots();
-    console.log('morningActivity:', this.morningActivity);
-    console.log('afternoonActivity:', this.afternoonActivity);
-    console.log('eveningActivity:', this.eveningActivity);
 
   }
 }

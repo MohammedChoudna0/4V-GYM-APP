@@ -13,6 +13,13 @@ export class ActivityService {
     new ActivityType('Actividad 4', 4),
   ];
 
+  private dateSource = new BehaviorSubject(new Date());
+  currentDate = this.dateSource.asObservable();
+  
+  changeDate(date: Date) {
+    this.dateSource.next(date);
+  }
+
   getActivityTypes(): ActivityType[] {
     return [...this.activityTypes];
   }
@@ -78,23 +85,17 @@ export class ActivityService {
     const activities = this._activities.getValue();
     activities.push(activity);
     this._activities.next(activities);
-    console.log("Actividad agregada", activity, activities.length);
   }
 
   deleteActivity(id: BigInt): void {
-    let activities = this._activities.getValue();
-    for (let i = 0; i < activities.length; i++) {
-        if (activities[i].id === id) {
-            activities.splice(i, 1);
-            break;
-        }
-
+    const activities = this._activities.getValue();
+    const index = activities.findIndex(activity => activity.id === id);
+    if (index !== -1) {
+      activities.splice(index, 1);
+      this._activities.next(activities);
+      console.log(activities.length);
     }
-    console.log(activities.length);
-    this._activities.next(activities);
-}
-
-
+  }
 
   updateActivity(updatedActivity: Activity): void {
     const activities = this._activities.getValue();

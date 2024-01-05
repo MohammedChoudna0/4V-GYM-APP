@@ -1,9 +1,13 @@
+<div class="mx-auto w-full max-w-[1440px] responsive-grid items-center ">
+    <div>
+        <mat-card class="demo-inline-calendar-card  pt-0">
+          <mat-calendar [(selected)]="selected" (selectedChange)="onDateChange($event)"></mat-calendar>
+        </mat-card>
+      </div>
 
-
-<div inline-datepicker data-date="02/25/2022"></div>
-
-<div class=" flex items-center justify-center">
-    <app-day-view-component></app-day-view-component>
+    <div class="flex items-center justify-center dayviewcomponent">
+        <app-day-view-component></app-day-view-component>
+    </div>
 </div>
 
 

@@ -1,4 +1,23 @@
 .hidden {
     display: none;
   }
-  
+  .add-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px !important;
+  }
+  .searchContainer{
+    padding: 0 20px;
+  }
+
+  @media (min-width: 900px) {
+    .add-button-container {
+      justify-content: flex-end;
+      margin-top: 0 !important;
+
+    }
+    .searchContainer{
+      padding: 0;
+
+    }
+  }

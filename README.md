@@ -1,35 +1,35 @@
 # AngularGymPro
-Este proyecto fue generado con Angular CLI versión 17.0.0.
+This project was generated with Angular CLI version 17.0.0.
 
-## Descripción del Proyecto
-Se creará una interfaz web para gestionar los monitores y las actividades de nuestro gimnasio.
+## Project Overview
+A web interface will be created to manage the monitors and activities of our gym.
 
-El objetivo de esta práctica es implementar el diseño de la manera más fiel posible, ¡incluso si parece horrendo! Se crearán los componentes reutilizables necesarios. No se acepta un solo componente o componentes copiados.
+The objective of this practice is to implement the design as faithfully as possible, even if it seems horrendous! Necessary reusable components will be created. A single component or copied components are not acceptable.
 
-La página siempre tiene un encabezado con el nombre y el logo. También hay un selector de funciones en la parte inferior donde puedes elegir entre Actividades y Monitores.
+The page always has a header with the name and logo. There is also a function selector at the bottom where you can choose between Activities and Monitors.
 
-## Página de Actividades
-En la página de actividades, puedes elegir una fecha y moverte entre fechas. Cada día aparece con 3 bloques de actividad fijos. Cuando un bloque está libre, se puede incluir una actividad a través del formulario. Las actividades también pueden ser eliminadas y editadas.
+## Activities Page
+On the activities page, you can choose a date and move between dates. Each day appears with 3 fixed activity blocks. When a block is free, an activity can be included through the form. Activities can also be deleted and edited.
 
-Cada tarjeta de actividad muestra los monitores y el tipo de actividad. Dependiendo del tipo de actividad, puede tener de 1 a N monitores. Por ejemplo, BodyPump siempre tiene que tener 2 monitores y Spinning solo 1.
+Each activity card shows the monitors and the type of activity. Depending on the type of activity, it can have 1 to N monitors. For example, BodyPump always has to have 2 monitors and Spinning only 1.
 
-## Página de Monitores
-En la página de monitores, los monitores actuales se muestran en modo carrusel, y también hay un motor de búsqueda para moverse por la lista. Se pueden crear nuevos monitores, y los seleccionados pueden ser editados y eliminados.
+## Monitors Page
+On the monitors page, the current monitors are displayed in carousel mode, and there is also a search engine to move through the list. New monitors can be created, and selected ones can be edited and deleted.
 
-## Servidor de Desarrollo
-Ejecuta `ng serve` para un servidor de desarrollo. Navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambias alguno de los archivos fuente.
+## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Generación de Código
-Ejecuta `ng generate component component-name` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Code scaffolding
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Construcción
-Ejecuta `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`.
+## Build
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Ejecución de Pruebas Unitarias
-Ejecuta `ng test` para ejecutar las pruebas unitarias a través de Karma.
+## Running unit tests
+Run `ng test` to execute the unit tests via Karma.
 
-## Ejecución de Pruebas de Extremo a Extremo
-Ejecuta `ng e2e` para ejecutar las pruebas de extremo a extremo a través de una plataforma de tu elección. Para usar este comando, primero necesitas agregar un paquete que implemente capacidades de pruebas de extremo a extremo.
+## Running end-to-end tests
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Ayuda Adicional
-Para obtener más ayuda sobre Angular CLI, usa `ng help` o consulta la página de Referencia de Comandos y Descripción General de Angular CLI.
+## Further help
+To get more help on the Angular CLI use `ng help` or go check out the Angular CLI Overview and Command Reference page.

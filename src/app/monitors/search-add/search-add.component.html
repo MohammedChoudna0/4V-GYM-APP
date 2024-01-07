@@ -28,39 +28,30 @@
 
 
 
-<!-- Modal de Añadir Monitor -->
 <div *ngIf="showModal"
   class="fixed inset-0 bg-gray-600 bg-opacity-50 backdrop-blur-sm overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-  <!-- Contenedor del modal centrado y más grande -->
   <div class="modal relative m-auto p-5 border w-1/2 max-w-2xl shadow-lg rounded-md bg-white">
-    <!-- Contenido del modal -->
     <div class="mt-3 text-center">
-      <!-- Icono del usuario y botón para cerrar -->
       <div class="flex justify-center">
         <img src="assets/Vector.svg" alt="imagenMonitor" />
       </div>
-      <!-- Formulario para añadir monitor -->
       <form class="w-full">
-        <!-- Campo Nombre --> 
         <div class="mb-4">
           <input [(ngModel)]="monitor.name" name="name  "
             class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name" type="text" placeholder="Nombre">
         </div>
-        <!-- Campo Email -->
         <div class="mb-4">
           <input [(ngModel)]="monitor.email" name="email"
             class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email" type="email" placeholder="Email">
         </div>
-        <!-- Campo Teléfono -->
         <div class="mb-4">
           <input [(ngModel)]="monitor.phone" name="phone"
             class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="phone" type="tel" placeholder="Teléfono">
 
         </div>
-        <!-- Botones Aceptar y Cancelar -->
         <div class="flex items-center justify-center space-x-4">
           <button
             class="w-64 h-12 bg-red-500 rounded-[20px] text-normal font-normal text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50"

@@ -16,6 +16,18 @@ Each activity card shows the monitors and the type of activity. Depending on the
 ## Monitors Page
 On the monitors page, the current monitors are displayed in carousel mode, and there is also a search engine to move through the list. New monitors can be created, and selected ones can be edited and deleted.
 
+## Development Environment
+This project uses Angular CLI version 17.0.0. Make sure you have Node.js and npm installed on your system before continuing. You can verify your versions with `node -v` and `npm -v`.
+
+To install Angular CLI, run `npm install -g @angular/cli`.
+
+## Instructions for Continuing Development
+1. Clone the repository to your local machine with `git clone`.
+2. Navigate to the project directory with `cd AngularGymPro`.
+3. Install the dependencies with `npm install`.
+4. Start the development server with `ng serve`. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+
 ## Component Diagram
 
 ![Component-Diagram](https://github.com/MohammedChoudna0/4V-GYM-APP/assets/117014262/5ef2b2da-964a-4f2b-9858-f142b43f8262)

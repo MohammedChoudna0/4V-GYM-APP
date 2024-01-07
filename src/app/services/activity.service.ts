@@ -114,8 +114,6 @@ export class ActivityService {
   
 }
 
-// activity-type.ts
-
 export class ActivityType {
   constructor(
     public name: string,

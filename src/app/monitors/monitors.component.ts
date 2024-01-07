@@ -37,7 +37,6 @@
     }
 
     addMonitor(name: string, email: string, phone: string): void {
-      // Asumiendo que el modelo Monitor tiene un campo id
       const newMonitor: Monitor = { id: this.monitors.length + 1, name, email, phone, imageUrl: '' };
       this.monitorService.addMonitor(newMonitor);
       this.isAddingMonitor = false;

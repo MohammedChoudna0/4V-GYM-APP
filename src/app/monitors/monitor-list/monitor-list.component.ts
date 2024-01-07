@@ -36,7 +36,6 @@ export class MonitorListComponent {
     this.monitors = [...this.allMonitors];
   }
   
-  // Función para mover el carrusel a la izquierda
   moveRight() {
     let first = this.monitors.shift();
     if (first) {
@@ -44,7 +43,6 @@ export class MonitorListComponent {
     }
   }
   
-  // Función para mover el carrusel a la izquierda
   moveLeft() {
     let last = this.monitors.pop();
     if (last) {
@@ -52,7 +50,6 @@ export class MonitorListComponent {
     }
   }
 
-  // Función para obtener todos los monitores
   getMonitors(): Monitor[] {
     return this.monitors.slice(this.currentIndex, this.itemsPerPage);;
   } 
@@ -62,7 +59,6 @@ export class MonitorListComponent {
     this.monitors = this.monitors.filter(m => m.id !== id);
   }
   
-  //función para editar un monitor
   editar(id: number): void {
     this.abrirModalEdicion(this.allMonitors.find(m => m.id === id)!);
   }
@@ -88,7 +84,6 @@ export class MonitorListComponent {
     this.filterMonitors();
   }
 
-  // Función para obtener los monitores según la búsqueda
   filterMonitors(): void {
     if (this._searchTerm) {
       this.monitors = this.allMonitors.filter(monitor => 
@@ -103,7 +98,6 @@ export class MonitorListComponent {
     if (this.fileInput && this.fileInput.nativeElement) {
       this.fileInput.nativeElement.click();
     } else {
-      // Manejar el caso en que el elemento aún no esté disponible
       console.error('El input de archivo no está disponible.');
     }
   }

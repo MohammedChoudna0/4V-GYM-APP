@@ -5,13 +5,10 @@
   </div>
 
   <div [style.background-color]="slotColor" class="p-4 flex items-center  w-full relative">
-    <!-- Contenido del slot -->
     <div *ngIf="activity; else freeSlot" class="flex">
-      <!-- Botón de borrar -->
       <button (click)="onDeleteClick()" class="absolute top-2 right-2 h-6 w-6">
         <img src="../../assets/ph_trash-fill.svg" alt="Trash Icon">
       </button>
-      <!-- Botón de editar -->
       <button (click)="onEditClick()" class="absolute bottom-2 right-2 h-6 w-6">
         <img src="../../assets/ic_round-edit.svg" alt="Edit Icon">
       </button>
@@ -36,7 +33,6 @@
     <ng-template #freeSlot>
       <div class="flex items-center justify-center w-full">
         <p class="text-white font-bold">FREE</p>
-        <!-- Botón de añadir -->
         <button (click)="onAddClick()" class="absolute top-2 right-3 h-8 w-8">
           <img src="../../assets/mingcute_add-fill.svg" alt="Otro Icono">
         </button>

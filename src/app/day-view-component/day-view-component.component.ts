@@ -1,4 +1,3 @@
-// day-view-component.component.ts
 import { Component, OnInit } from '@angular/core';
 import { TimeslotComponent } from '../timeslot/timeslot.component';
 import { CommonModule } from '@angular/common';

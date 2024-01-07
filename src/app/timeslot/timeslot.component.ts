@@ -97,13 +97,13 @@ export class TimeslotComponent  {
   
   
   onCancelarClick() {
-    // Haz algo cuando se haga clic en "CANCELAR"
+    this.closeModal();
+    this.editMode = false;
   }
   openModal(): void {
     this.showModal = true;
   }
 
-  // Función para cerrar el modal
   closeModal(): void {
     this.showModal = false;
   }

@@ -15,16 +15,21 @@
       <button (click)="onEditClick()" class="absolute bottom-2 right-2 h-6 w-6">
         <img src="../../assets/ic_round-edit.svg" alt="Edit Icon">
       </button>
-      
-      <div class="flex flex-row space-x-2">
-        <div *ngFor="let monitor of activity.monitors">
-          <img src="../../assets/active_ion_person.svg" alt="Monitor Icon" class="h-2/3 w-5/6 m-auto">
-          <span>{{ monitor }}</span>
+      <div class="flex flex-row space-x-2 items-center">
+        <div *ngFor="let monitor of activity.monitors; let i = index">
+          <ng-container *ngIf="i < (isMobile ? 1 : 2)">
+            <img src="../../assets/active_ion_person.svg" alt="Monitor Icon" class="h-15 w-15 m-auto">
+            <span>{{ monitor }}</span>
+          </ng-container>
         </div>
+        <ng-container *ngIf="activity.monitors.length > (isMobile ? 1 : 2)">
+          <span class="font-bold text-red-500">Hay {{ isMobile ? '2' : '3' }} <br> o más</span>
+        </ng-container>
       </div>
+      
+      
 
-      <!-- Imagen representativa de la actividad -->
-      <img [src]="'../../assets/' + activity.type + '.svg'" alt="Activity Icon" class="absolute top-2 right-12">
+      <img [src]="'../../assets/' + activity.type + '.svg'" alt="Activity Icon" class="absolute top-2 right-12 " style="height: 6rem ; width: 6rem;"> 
     </div>
 
 
@@ -39,16 +44,13 @@
     </ng-template>
   </div>
 </div>
-<!-- Modal de Añadir actividad -->
+
 <div *ngIf="showModal"
   class="fixed inset-0 bg-gray-600 bg-opacity-50 backdrop-blur-sm overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-  <!-- Contenedor del modal centrado y más grande -->
-  <div class="relative m-auto p-5 border w-1/2 max-w-2xl shadow-lg rounded-md bg-white">
-    <!-- Contenido del modal -->
+  <div class="modal relative m-auto p-5 border w-1/2 max-w-2xl shadow-lg rounded-md bg-white">
     <div class="mt-3 text-center">
 
       <form class="w-full">
-        <!-- Campo Nombre -->
         <select [(ngModel)]="selectedActivityType" name="activityType" (change)="onActivitySelected($event)" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
           <option value="" disabled>Selecciona un tipo de actividad</option>
           <option *ngFor="let activityType of activityTypes" [value]="activityType.name">{{ activityType.name }}</option>
@@ -61,10 +63,9 @@
           </select>
         </div>
       
-        <!-- Botones Aceptar y Cancelar -->
         <div class="flex items-center justify-center space-x-4">
           <button
-          class="w-64 h-12 bg-red-500 rounded-[20px] text-normal font-normal text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50"
+          [disabled]="!selectedActivityType || selectedMonitors.length < (selectedActivity?.numberOfMonitors ?? 0)" class="w-64 h-12 bg-red-500 rounded-[20px] text-normal font-normal text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50"
           type="button"
           (click)="onAceptarClick()">
           Aceptar
@@ -80,4 +81,4 @@
     </div>
   </div>
 </div>
-<!--danger-->
+

@@ -6,6 +6,8 @@ import { Monitor } from '../model/monitorModel';
 import { MonitorService } from '../services/monitors.service';
 import { ActivityService } from '../services/activity.service';
 import { ActivityType } from '../services/activity.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { HostListener } from '@angular/core';
 
 
 
@@ -29,7 +31,13 @@ export class TimeslotComponent  {
   selectedMonitors: string[] = [];
   selectedActivityType: string = '';
   editMode: boolean = false;
-
+  isMobile = window.innerWidth < 768;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isMobile = event.target.innerWidth < 768;
+  }
+  
+  
 
   onActivitySelected(event: any) {
     const selectedActivityName = event.target.value;
@@ -39,7 +47,7 @@ export class TimeslotComponent  {
   get slotColor(): string {
     return this.activity ? '#D9D9D9' : '#2B7D3D';
   }
-  constructor(private monitorService: MonitorService , private activityService: ActivityService) {
+  constructor(private monitorService: MonitorService , private activityService: ActivityService, private cdr: ChangeDetectorRef) {
     this.monitors = this.monitorService.getMonitors();
     this.activityTypes = this.activityService.getActivityTypes();
 
@@ -58,6 +66,11 @@ export class TimeslotComponent  {
       this.openModal();
     }
   }
+  hasDuplicateMonitors(): boolean {
+    const uniqueMonitors = new Set(this.selectedMonitors);
+    return uniqueMonitors.size !== this.selectedMonitors.length;
+  }
+  
   onDeleteClick() {
     if (this.activity && this.activity.id !== undefined) {
       this.activityService.deleteActivity(this.activity.id);
@@ -72,7 +85,7 @@ export class TimeslotComponent  {
         monitors: this.selectedMonitors,
         type: this.selectedActivityType,
         timeSlot: this.startTime + "-" + this.endTime  , 
-        id: this.editMode && this.activity ? this.activity.id : BigInt(this.activityService.getActivities.length + 1) 
+        id: this.editMode && this.activity ? this.activity.id : BigInt(this.activityService.getNumberOfActivities() + 1) 
       };
       if (this.editMode) {
         this.activityService.updateActivity(newActivity);

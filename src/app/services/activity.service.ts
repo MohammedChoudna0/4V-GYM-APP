@@ -7,10 +7,10 @@ import { Activity } from '../model/activityModel';
 })
 export class ActivityService {
   private activityTypes: ActivityType[] = [
-    new ActivityType('Actividad 1', 3),
-    new ActivityType('Actividad 2', 2),
-    new ActivityType('Actividad 3', 1),
-    new ActivityType('Actividad 4', 4),
+    new ActivityType('spinning', 3),
+    new ActivityType('pilates', 2),
+    new ActivityType('zumba', 1),
+    new ActivityType('yoga', 4),
   ];
 
   private dateSource = new BehaviorSubject(new Date());
@@ -67,6 +67,10 @@ export class ActivityService {
     return this._activities.asObservable();
   }
 
+  getNumberOfActivities(): number {
+    return this._activities.value.length;
+  }
+  
   getActivity(id: BigInt): Activity | undefined {
     const activities = this._activities.getValue();
     return activities.find(activity => activity.id === id);
@@ -85,17 +89,16 @@ export class ActivityService {
     const activities = this._activities.getValue();
     activities.push(activity);
     this._activities.next(activities);
+    console.log(activities);
   }
+  
 
   deleteActivity(id: BigInt): void {
-    const activities = this._activities.getValue();
-    const index = activities.findIndex(activity => activity.id === id);
-    if (index !== -1) {
-      activities.splice(index, 1);
-      this._activities.next(activities);
-      console.log(activities.length);
-    }
+    let activities = this._activities.getValue();
+    activities = activities.filter(activity => activity.id !== id);
+    this._activities.next([...activities]);
   }
+  
 
   updateActivity(updatedActivity: Activity): void {
     const activities = this._activities.getValue();

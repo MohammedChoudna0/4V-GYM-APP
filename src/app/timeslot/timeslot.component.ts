@@ -37,12 +37,10 @@ export class TimeslotComponent  {
     this.isMobile = event.target.innerWidth < 768;
   }
   
-  
-
   onActivitySelected(event: any) {
     const selectedActivityName = event.target.value;
     this.selectedActivity = this.activityTypes.find(activityType => activityType.name === selectedActivityName) || null;
-  
+    this.selectedMonitors = Array(selectedActivityName.numberOfMonitors).fill(null);
   }
   get slotColor(): string {
     return this.activity ? '#D9D9D9' : '#2B7D3D';

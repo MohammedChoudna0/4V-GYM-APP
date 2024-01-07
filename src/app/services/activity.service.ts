@@ -104,10 +104,14 @@ export class ActivityService {
     const activities = this._activities.getValue();
     const index = activities.findIndex(activity => activity.id === updatedActivity.id);
     if (index !== -1) {
-      activities[index] = updatedActivity;
-      this._activities.next(activities);
+      const updatedActivities = [...activities];
+      updatedActivities[index] = updatedActivity;
+      this._activities.next(updatedActivities);
+      console.log(updatedActivities);
+
     }
   }
+  
 }
 
 // activity-type.ts

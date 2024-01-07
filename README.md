@@ -1,27 +1,35 @@
 # AngularGymPro
+Este proyecto fue generado con Angular CLI versión 17.0.0.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+## Descripción del Proyecto
+Se creará una interfaz web para gestionar los monitores y las actividades de nuestro gimnasio.
 
-## Development server
+El objetivo de esta práctica es implementar el diseño de la manera más fiel posible, ¡incluso si parece horrendo! Se crearán los componentes reutilizables necesarios. No se acepta un solo componente o componentes copiados.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+La página siempre tiene un encabezado con el nombre y el logo. También hay un selector de funciones en la parte inferior donde puedes elegir entre Actividades y Monitores.
 
-## Code scaffolding
+## Página de Actividades
+En la página de actividades, puedes elegir una fecha y moverte entre fechas. Cada día aparece con 3 bloques de actividad fijos. Cuando un bloque está libre, se puede incluir una actividad a través del formulario. Las actividades también pueden ser eliminadas y editadas.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Cada tarjeta de actividad muestra los monitores y el tipo de actividad. Dependiendo del tipo de actividad, puede tener de 1 a N monitores. Por ejemplo, BodyPump siempre tiene que tener 2 monitores y Spinning solo 1.
 
-## Build
+## Página de Monitores
+En la página de monitores, los monitores actuales se muestran en modo carrusel, y también hay un motor de búsqueda para moverse por la lista. Se pueden crear nuevos monitores, y los seleccionados pueden ser editados y eliminados.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Servidor de Desarrollo
+Ejecuta `ng serve` para un servidor de desarrollo. Navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambias alguno de los archivos fuente.
 
-## Running unit tests
+## Generación de Código
+Ejecuta `ng generate component component-name` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Construcción
+Ejecuta `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`.
 
-## Running end-to-end tests
+## Ejecución de Pruebas Unitarias
+Ejecuta `ng test` para ejecutar las pruebas unitarias a través de Karma.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Ejecución de Pruebas de Extremo a Extremo
+Ejecuta `ng e2e` para ejecutar las pruebas de extremo a extremo a través de una plataforma de tu elección. Para usar este comando, primero necesitas agregar un paquete que implemente capacidades de pruebas de extremo a extremo.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Ayuda Adicional
+Para obtener más ayuda sobre Angular CLI, usa `ng help` o consulta la página de Referencia de Comandos y Descripción General de Angular CLI.
